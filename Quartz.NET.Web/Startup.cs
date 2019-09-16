@@ -12,13 +12,13 @@ using Newtonsoft.Json.Serialization;
 using Quartz.Impl;
 using Quartz.NET.Web.Extensions;
 using Quartz.NET.Web.Filters;
-using System;   
+using System;
 
 namespace Quartz.NET.Web
 {
     public class Startup
     {
-         public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -41,14 +41,15 @@ namespace Quartz.NET.Web
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             });
 
-      
+
             services.AddMvc()
             .AddJsonOptions(options =>
               options.SerializerSettings.ContractResolver = new DefaultContractResolver())
-            .AddJsonOptions(options => {
-                  options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-                  options.SerializerSettings.ContractResolver=new  CamelCasePropertyNamesContractResolver();
-              });
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
             services.AddMvc(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -66,7 +67,7 @@ namespace Quartz.NET.Web
             services.AddSingleton<IPathProvider, PathProvider>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-         
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +89,6 @@ namespace Quartz.NET.Web
             app.UseQuartz(env).UseStaticHttpContext();
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
