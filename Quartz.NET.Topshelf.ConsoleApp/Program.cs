@@ -26,6 +26,7 @@ namespace Quartz.NET.Topshelf.ConsoleApp
                 {
                     //1、nlog.config必须把复制到输出目录为始终复制
                     //2、log问价在debug中
+                    //3、这边的UseNlog是让TopShelf内部使用Nlog作为日志输出框架，要自己使用时，需要额外配置。
                     x.UseNLog();
 
                     //Simple Service
