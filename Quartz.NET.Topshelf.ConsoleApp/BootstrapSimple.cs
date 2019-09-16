@@ -8,14 +8,15 @@ using Topshelf;
 
 namespace Quartz.NET.Topshelf.ConsoleApp
 {
-    public class Bootstrap : ServiceControl
+    //简单模式
+    public class BootstrapSimple : ServiceControl
     {
         private double InternalInMinutes = 1;
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private Timer _timer;
         public string Url { get; set; }
 
-        public Bootstrap()
+        public BootstrapSimple()
         {
             _timer = new Timer(InternalInMinutes * 60 * 1000) { AutoReset = true };
             _timer.Elapsed += (sender, eventArgs) =>
